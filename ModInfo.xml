@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<ModInfo>
+		<Name value="OcbWayPointIcons" />
+		<Description value="Additional map waypoint icons (extendable via xml)." />
+		<Website value="https://github.com/OCB7D2D/OcbWayPointIcons" />
+		<Author value="ocbMaurice" />
+		<Version value="0.1.0" compat="A20"/>
+	</ModInfo>
+</xml>
