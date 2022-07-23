@@ -3,6 +3,13 @@
 	<setattribute xpath="/windows/window[@name='mapAreaEnterWaypointName']" name="depth">8</setattribute>
 	<setattribute xpath="/windows/window[@name='mapAreaEnterWaypointName']/panel/panel/textfield" name="foregroundlayer">true</setattribute>
 
+	<!-- show color picker below text input field -->
+	<append xpath="/windows/window[@name='mapAreaEnterWaypointName']/panel[@name='content']" name="depth">
+		<panel pos="-36,-54" depth="1" width="140" disableautobackground="true">
+			<color_picker name="navIconColor" />
+		</panel>
+	</append>
+
 	<!-- Remove old structure completely, re-create afterwards -->
 	<remove xpath="/windows/window[@name='mapAreaChooseWaypoint']" />
 

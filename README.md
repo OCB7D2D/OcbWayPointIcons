@@ -8,6 +8,10 @@ This mod is not EAC (Easy Anti-Cheat) compatible, so turn it off!
 
 ## Changelog
 
+### Version 0.2.0
+
+- Add color picker to colorize text and icons
+
 ### Version 0.1.0
 
 - Initial version
