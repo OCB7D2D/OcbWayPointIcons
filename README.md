@@ -1,4 +1,4 @@
-# OCB Way-Point Icons - 7 Days to Die (A20) Addon
+# OCB Way-Point Icons - 7 Days to Die (A21) Addon
 
 Custom icons for map waypoints (extendable via xml).
 
@@ -18,6 +18,10 @@ Simply [download here from GitHub][2] and put into your A20 Mods folder:
 - https://github.com/OCB7D2D/OcbWayPointIcons/archive/master.zip (master branch)
 
 ## Changelog
+
+### Version 0.3.0
+
+- Update compatibility for 7D2D A21.0(b313)
 
 ### Version 0.2.0
 
