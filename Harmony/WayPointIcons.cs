@@ -1,7 +1,5 @@
 ﻿using HarmonyLib;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Xml;
 using UnityEngine;
 
 #pragma warning disable IDE0051 // Remove unused private members
@@ -42,11 +40,9 @@ public class WayPointIcons : IModApi
                 }
                 entries[i].SetIndex(i);
             }
-
             XUiC_CustomWayPointIcons.SetIconCount(entries.Length);
             int cols = XUiC_CustomWayPointIcons.Cols;
             int rows = XUiC_CustomWayPointIcons.Rows;
-
             if (__instance.ViewComponent is XUiV_Grid grid)
             {
                 grid.Columns = cols;
@@ -98,11 +94,11 @@ public class WayPointIcons : IModApi
         }
     }
 
-    static private bool ParseHexByte(char low, char hi, out byte value)
+    static private bool ParseHexByte(char hi, char low, out byte value)
     {
         value = 0;
         if (!ParseHexlet(low, out byte l)) return false;
-        if (!ParseHexlet(low, out byte h)) return false;
+        if (!ParseHexlet(hi, out byte h)) return false;
         value = (byte)(l + h * 16);
         return true;
     }
@@ -110,14 +106,14 @@ public class WayPointIcons : IModApi
     // Colorize way-point icon same as text is colored
     private static void ColorizeWaypoint(Waypoint wp)
     {
-        var nav = wp.navObject;
-        if (wp?.navObject?.DisplayName == null) return;
-        // Do nothing if color is already overridden
-        if (wp.navObject.UseOverrideColor) return;
+        if (wp?.navObject?.name == null) return;
         // Get the display name to extract color
-        string name = wp.navObject.DisplayName;
+        string name = wp.navObject.name;
+        name = name.Replace("[/c]", "");
         // Check if text has enough room to contain color and check it
         if (name.Length < 8 || name[0] != '[' || name[7] != ']') return;
+        // Do nothing if color is already overridden
+        if (wp.navObject.UseOverrideColor) return;
         // There is certainly a good utility function to do all this ;)
         if (!ParseHexByte(name[1], name[2], out byte r)) return;
         if (!ParseHexByte(name[3], name[4], out byte g)) return;
@@ -140,7 +136,7 @@ public class WayPointIcons : IModApi
 
         static void Postfix(EntityPlayer _player)
         {
-            foreach (var wp in _player.Waypoints.List)
+            foreach (var wp in _player.Waypoints?.Collection?.list)
                 ColorizeWaypoint(wp);
         }
     }
@@ -151,7 +147,7 @@ public class WayPointIcons : IModApi
     [HarmonyPatch("UpdateWaypointsList")]
     public class XUiC_MapWaypointList_UpdateWaypointsList
     {
-        static void Prefix(XUiC_MapWaypointList __instance, Waypoint _selectThisWaypoint)
+        static void Prefix(Waypoint _selectThisWaypoint)
         {
             if (_selectThisWaypoint == null) return;
             ColorizeWaypoint(_selectThisWaypoint);
@@ -167,12 +163,29 @@ public class WayPointIcons : IModApi
         {
             if (__instance.Parent.GetChildById("navIconColor") is XUiC_ColorPicker picker)
             {
-                _name = string.Format("[{0:X2}{1:X2}{2:X2}]{3}",
+                _name = string.Format("[{0:x2}{1:x2}{2:x2}]{3}",
                     (byte)(picker.SelectedColor.r * 255),
                     (byte)(picker.SelectedColor.g * 255),
                     (byte)(picker.SelectedColor.b * 255),
                     _name);
             }
+        }
+    }
+
+    // Make sure to default to vanilla color (white)
+    [HarmonyPatch(typeof(NavObject))]
+    [HarmonyPatch("DisplayName")]
+    [HarmonyPatch(MethodType.Getter)]
+    public class NavObject_DisplayName_Get
+    {
+        static void Postfix(ref string __result)
+        {
+            if (__result == null) return;
+            __result = __result.Replace("[/c]", "");
+            if (__result.Length < 8) return;
+            if (__result[0] != '[') return;
+            if (__result[7] != ']') return;
+            // __result = __result.Substring(8);
         }
     }
 
@@ -186,6 +199,25 @@ public class WayPointIcons : IModApi
             if (__instance.Parent.GetChildById("navIconColor") is XUiC_ColorPicker picker)
             {
                 picker.SelectedColor = Color.white;
+            }
+        }
+    }
+
+    // Cleanup added escape sequence for waypoint
+    // TFP is probably going to fix this (hopefully)
+    [HarmonyPatch(typeof(XUiC_MapWaypointList))]
+    [HarmonyPatch("UpdateWaypointsList")]
+    public class XUiC_MapWaypointList_Update
+    {
+        static void Postfix(XUiC_MapWaypointList __instance)
+        {
+            foreach (var node in __instance.children)
+            {
+                if (node is XUiC_MapWaypointListEntry entry)
+                {
+                    entry.Name.Text = entry.Name.Text.Replace("[/c]", "");
+                    // ColorizeWaypoint(entry.Waypoint);
+                }
             }
         }
     }
