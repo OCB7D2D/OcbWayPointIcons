@@ -1,4 +1,4 @@
-# OCB Way-Point Icons - 7 Days to Die (A21) Addon
+# OCB Way-Point Icons - 7 Days to Die (V1.0 exp) Addon
 
 Custom icons for map waypoints (extendable via xml).
 
@@ -12,12 +12,18 @@ This mod is not EAC (Easy Anti-Cheat) compatible, so turn it off!
 
 ## Download and Install
 
-Simply [download here from GitHub][2] and put into your A20 Mods folder:
+End-Users are encouraged to download my mods from [NexusMods][1].  
+Every download there helps me to buy stuff for mod development.
 
-- https://github.com/OCB7D2D/OcbWayPointIcons/releases (official release versions)
-- https://github.com/OCB7D2D/OcbWayPointIcons/archive/master.zip (master branch)
+Otherwise please use one of the [official releases][2] here.  
+Only clone or download the repo if you know what you do!
 
 ## Changelog
+
+### Version 0.4.0
+
+- First compatibility with V1.0 (exp)
+- Fix small vanilla bug with colors
 
 ### Version 0.3.0
 
@@ -40,11 +46,7 @@ Simply [download here from GitHub][2] and put into your A20 Mods folder:
 - Bicycle: https://thenounproject.com/icon/1067030/ (Nico Ilk)
 - Motorcycle: https://thenounproject.com/icon/4046333/ (Iconiqu)
 
-## Compatibility
-
-I've developed and tested this Mod against version a20.b218.
-
-[1]: https://github.com/OCB7D2D/A20BepInExPreloader
+[1]: https://www.nexusmods.com/7daystodie/mods/1883
 [2]: https://github.com/OCB7D2D/OcbWayPointIcons/releases
 [3]: https://github.com/OCB7D2D/OcbWayPointIcons/actions/workflows/ci.yml
 [4]: https://github.com/OCB7D2D/OcbWayPointIcons/actions/workflows/ci.yml/badge.svg
