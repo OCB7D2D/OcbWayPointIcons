@@ -1,4 +1,4 @@
-# OCB Way-Point Icons - 7 Days to Die (V2.0) Addon
+# OCB Way-Point Icons - 7 Days to Die (V2.1) Addon
 
 Custom icons for map waypoints (extendable via xml).
 
