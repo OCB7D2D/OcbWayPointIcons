@@ -1,4 +1,4 @@
-# OCB Way-Point Icons - 7 Days to Die (V2.3) Addon
+# OCB Way-Point Icons - 7 Days to Die (V3.3) Addon
 
 Custom icons for map waypoints (extendable via xml).
 
@@ -19,6 +19,13 @@ Otherwise please use one of the [official releases][2] here.
 Only clone or download the repo if you know what you do!
 
 ## Changelog
+
+### Version 0.5.2
+
+- Update for 7D2D V3.3 (`XUiWindowGroup.ID` is now `Id`,
+  `XUiController.xui` is now a field, `RefreshBindings` has no args)
+- Move XUi patches to `Config/XUi_InGame` (`controls.xml` is now
+  `templates.xml`) and adapt them to the new V3.3 waypoint windows
 
 ### Version 0.5.1
 

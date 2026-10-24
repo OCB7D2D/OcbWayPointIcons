@@ -1,13 +1,13 @@
 <configs>
 
 	<setattribute xpath="/windows/window[@name='mapAreaEnterWaypointName']" name="depth">8</setattribute>
-	<setattribute xpath="/windows/window[@name='mapAreaEnterWaypointName']/panel/panel/textfield" name="foregroundlayer">true</setattribute>
+	<setattribute xpath="/windows/window[@name='mapAreaEnterWaypointName']/rect[@name='content']/rect/textfield[@name='waypointInput']" name="foregroundlayer">true</setattribute>
 
 	<!-- show color picker below text input field -->
-	<append xpath="/windows/window[@name='mapAreaEnterWaypointName']/panel[@name='content']" name="depth">
-		<panel pos="-36,-54" depth="1" width="140" disableautobackground="true">
+	<append xpath="/windows/window[@name='mapAreaEnterWaypointName']/rect[@name='content']">
+		<rect pos="-36,-54" depth="1" width="140">
 			<color_picker name="navIconColor" />
-		</panel>
+		</rect>
 	</append>
 
 	<!-- Remove old structure completely, re-create afterwards -->
@@ -15,8 +15,9 @@
 
 	<!-- Basic new structure -->
 	<append xpath="/windows">
-		<window name="mapAreaChooseWaypoint" depth="7" pos="200,-200" cursor_area="true" controller="XUiC_CustomWayPointIcons, WayPointIcons" height="{outerHeight}">
-			<panel name="content" depth="0" pos="0,0" width="{outerWidth}" height="{outerHeight}" bordercolor="[black]" borderthickness="3">
+		<window name="mapAreaChooseWaypoint" depth="7" pos="200,-200" cursor_area="true" controller="XUiC_CustomWayPointIcons, WayPointIcons" width="{outerWidth}" height="{outerHeight}">
+			<panel name="content" depth="0" pos="0,0" width="{outerWidth}" height="{outerHeight}">
+				<sprite depth="1" name="background" color="[darkestGrey]" width="{outerWidth}" height="{outerHeight}" type="sliced" />
 				<sprite depth="8" name="backgroundMain" sprite="menu_empty3px" color="[black]"
 						width="{outerWidth}" height="{outerHeight}" type="sliced" fillcenter="false" />
 				<grid name="list" pos="3,-3" width="43" height="43" cell_width="43" cell_height="43"

@@ -27,7 +27,7 @@ public class XUiC_CustomWayPointIcons : XUiController
 
     public override void Init()
     {
-        ID = WindowGroup.ID;
+        ID = WindowGroup.Id;
         panel = GetChildById("content").ViewComponent as XUiV_Panel;
         list = windowGroup.Controller.GetChildByType<XUiC_MapSubPopupList>();
         grid = list.ViewComponent as XUiV_Grid;
